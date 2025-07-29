@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BilliardinoGo - Vendita e Affitto Biliardini</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f7f7f7;
+      color: #333;
+    }
+    header {
+      background-color: #222;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      background-color: #444;
+      padding: 0.5rem;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+    }
+    .hero {
+      background: url('https://images.unsplash.com/photo-1584718925903-7b9070b1f35f') center/cover no-repeat;
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .section {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    .product {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .product img {
+      width: 100%;
+      border-radius: 6px;
+    }
+    .footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>BilliardinoGo</h1>
+    <p>Vendita e Affitto di Calciobalilla in tutta Italia</p>
+  </header>
+
+  <nav>
+    <a href="#vendita">Vendita</a>
+    <a href="#affitto">Affitto</a>
+    <a href="#chi">Chi Siamo</a>
+    <a href="#contatti">Contatti</a>
+  </nav>
+
+  <section class="hero">
+    <h2>Porta il divertimento a casa tua</h2>
+    <p>Biliardini di alta qualità disponibili per l'acquisto o l'affitto in tutta Italia</p>
+  </section>
+
+  <section class="section" id="vendita">
+    <h2>Biliardini in Vendita</h2>
+    <div class="products">
+      <div class="product">
+        <img src="https://via.placeholder.com/400x300" alt="Biliardino Classic">
+        <h3>Biliardino Classic</h3>
+        <p>Prezzo: €299</p>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/400x300" alt="Biliardino Pro">
+        <h3>Biliardino Pro</h3>
+        <p>Prezzo: €449</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="affitto">
+    <h2>Biliardini in Affitto</h2>
+    <div class="products">
+      <div class="product">
+        <img src="https://via.placeholder.com/400x300" alt="Affitto Settimanale">
+        <h3>Affitto Settimanale</h3>
+        <p>Prezzo: €39/settimana</p>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/400x300" alt="Affitto per Eventi">
+        <h3>Affitto per Eventi</h3>
+        <p>Prezzo: da €59</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="chi">
+    <h2>Chi Siamo</h2>
+    <p>BilliardinoGo nasce dalla passione per il gioco e il design. Offriamo soluzioni flessibili per portare il divertimento ovunque: in casa, in ufficio o in eventi. Lavoriamo in dropshipping per offrire prezzi competitivi e spedizioni rapide.</p>
+  </section>
+
+  <section class="section" id="contatti">
+    <h2>Contattaci</h2>
+    <p>Email: info@billiardinogo.it</p>
+    <p>Telefono: +39 333 1234567</p>
+    <p>Oppure compila il form (in fase di sviluppo)</p>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 BilliardinoGo - Tutti i diritti riservati</p>
+  </footer>
+</body>
+</html>
