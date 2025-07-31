@@ -9,13 +9,13 @@
     header, footer { background: #1e3a8a; color: white; text-align: center; padding: 2rem; }
     .product-grid { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; padding: 2rem; }
     .product { background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 250px; cursor: pointer; }
-    .product img { width: 100%; border-radius: 10px; height: 180px; object-fit: cover; }
-    .carousel { display: flex; overflow: hidden; }
-    .carousel img { min-width: 100%; transition: transform 0.3s ease; }
+    .product .preview-img { width: 100%; border-radius: 10px; height: 180px; object-fit: cover; }
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; }
-    .modal-content { background: white; padding: 2rem; border-radius: 10px; width: 90%; max-width: 500px; position: relative; text-align: center; }
+    .modal-content { background: white; padding: 2rem; border-radius: 10px; width: 90%; max-width: 600px; position: relative; text-align: center; }
     .close { position: absolute; top: 10px; right: 20px; font-size: 20px; cursor: pointer; }
     .btn { margin-top: 15px; padding: 10px 20px; background: #1e3a8a; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    .modal-images { display: flex; gap: 10px; justify-content: center; margin-bottom: 15px; flex-wrap: wrap; }
+    .modal-images img { width: 30%; border-radius: 10px; object-fit: cover; }
   </style>
 </head>
 <body>
@@ -28,33 +28,21 @@
 <div class="product-grid">
   <!-- Prodotto 1 -->
   <div class="product" onclick="openModal(0)">
-    <div class="carousel">
-      <img src="biliardino1.jpg" />
-      <img src="biliardino1a.jpg" />
-      <img src="biliardino1b.jpg" />
-    </div>
+    <img class="preview-img" src="biliardino1.jpg" alt="Biliardino Classic">
     <h3>Biliardino Classic</h3>
     <p>Prezzo: <del>€349</del> <strong>€299</strong></p>
   </div>
 
   <!-- Prodotto 2 -->
   <div class="product" onclick="openModal(1)">
-    <div class="carousel">
-      <img src="biliardino2.jpg" />
-      <img src="biliardino2a.jpg" />
-      <img src="biliardino2b.jpg" />
-    </div>
+    <img class="preview-img" src="biliardino2.jpg" alt="Biliardino Deluxe">
     <h3>Biliardino Deluxe</h3>
     <p>Prezzo: <del>€399</del> <strong>€349</strong></p>
   </div>
 
   <!-- Prodotto 3 -->
   <div class="product" onclick="openModal(2)">
-    <div class="carousel">
-      <img src="biliardino3.jpg" />
-      <img src="biliardino3a.jpg" />
-      <img src="biliardino3b.jpg" />
-    </div>
+    <img class="preview-img" src="biliardino3.jpg" alt="Biliardino Pro">
     <h3>Biliardino Pro</h3>
     <p>Prezzo: <del>€449</del> <strong>€399</strong></p>
   </div>
@@ -65,6 +53,7 @@
   <div class="modal-content" id="modal-content">
     <span class="close" onclick="closeModal()">&times;</span>
     <h2 id="modal-title"></h2>
+    <div class="modal-images" id="modal-images"></div>
     <p id="modal-description"></p>
     <p id="modal-price"></p>
     <form id="paypal-form" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
@@ -86,44 +75,48 @@
   const products = [
     {
       title: "Biliardino Classic",
-      description: "Modello perfetto per la casa o piccoli locali. Robusto e divertente.",
-      price: "299.00"
+      description: "Modello perfetto per la casa o piccoli locali. Robusto, compatto e facile da trasportare.",
+      price: "299.00",
+      images: ["biliardino1.jpg", "biliardino1a.jpg", "biliardino1b.jpg"]
     },
     {
       title: "Biliardino Deluxe",
-      description: "Design elegante e materiali di alta qualità. Ideale per ambienti professionali.",
-      price: "349.00"
+      description: "Design elegante e materiali di alta qualità. Ideale per uffici, bar e spazi ricreativi.",
+      price: "349.00",
+      images: ["biliardino2.jpg", "biliardino2a.jpg", "biliardino2b.jpg"]
     },
     {
       title: "Biliardino Pro",
-      description: "Prestazioni elevate, aste telescopiche e struttura professionale. Perfetto per tornei.",
-      price: "399.00"
+      description: "Struttura professionale con aste telescopiche. Ideale per tornei e ambienti intensivi.",
+      price: "399.00",
+      images: ["biliardino3.jpg", "biliardino3a.jpg", "biliardino3b.jpg"]
     }
   ];
 
   function openModal(index) {
     const modal = document.getElementById('modal');
-    const content = products[index];
-    document.getElementById('modal-title').textContent = content.title;
-    document.getElementById('modal-description').textContent = content.description;
-    document.getElementById('modal-price').innerHTML = `<strong>€${content.price}</strong>`;
-    document.getElementById('item_name').value = content.title;
-    document.getElementById('amount').value = content.price;
+    const product = products[index];
+    document.getElementById('modal-title').textContent = product.title;
+    document.getElementById('modal-description').textContent = product.description;
+    document.getElementById('modal-price').innerHTML = `<strong>Prezzo: €${product.price}</strong>`;
+    document.getElementById('item_name').value = product.title;
+    document.getElementById('amount').value = product.price;
+
+    const imgContainer = document.getElementById('modal-images');
+    imgContainer.innerHTML = "";
+    product.images.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = product.title;
+      imgContainer.appendChild(img);
+    });
+
     modal.style.display = 'flex';
   }
 
   function closeModal() {
     document.getElementById('modal').style.display = 'none';
   }
-
-  // Galleria automatica
-  document.querySelectorAll('.carousel').forEach(carousel => {
-    let index = 0;
-    setInterval(() => {
-      index = (index + 1) % 3;
-      carousel.style.transform = `translateX(-${index * 100}%)`;
-    }, 3000);
-  });
 </script>
 
 </body>
