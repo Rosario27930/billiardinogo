@@ -1,51 +1,23 @@
-<!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BilliardinoGo - Vendita e Noleggio Biliardini</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
     header { background: #1e3a8a; color: white; padding: 2rem; text-align: center; }
     section { padding: 2rem; }
-    .intro { max-width: 800px; margin: auto; text-align: center; font-size: 1.1rem; }
-    .product-grid { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; }
-    .product { background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 280px; text-align: center; cursor: pointer; overflow: hidden; }
-    .product img { width: 100%; height: auto; border-bottom: 1px solid #ccc; }
-    .product h3 { margin: 1rem 0 0.5rem; }
-    .product p { margin-bottom: 1rem; }
-    footer { background: #1e3a8a; color: white; padding: 1rem; text-align: center; }
-
-    /* Modal */
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 10; padding: 1rem; }
-    .modal-content {
-      background: white;
-      padding: 2rem;
-      max-width: 900px;
-      width: 100%;
-      border-radius: 10px;
-      position: relative;
-      text-align: center;
-      overflow-y: auto;
-      max-height: 90vh;
-    }
-    .modal-content img { width: 100%; margin-bottom: 1rem; border-radius: 10px; }
+    .intro { max-width: 800px; margin: auto; text-align: center; margin-bottom: 2rem; }
+    .product-grid { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
+    .product { background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 250px; text-align: center; cursor: pointer; }
+    .product img { width: 100%; border-radius: 10px; }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; }
+    .modal-content { background: white; padding: 2rem; border-radius: 15px; width: 90%; max-width: 600px; position: relative; }
+    .modal-content img { width: 100%; border-radius: 10px; }
     .close { position: absolute; top: 10px; right: 20px; font-size: 1.5rem; cursor: pointer; }
-
-    .gallery { display: flex; gap: 1rem; overflow-x: auto; margin-bottom: 1rem; }
-    .gallery img { height: 150px; border-radius: 10px; }
-
-    .btn-paypal input[type="submit"] {
-      background-color: #ffc439;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 5px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .details { text-align: left; margin-top: 1rem; }
-    .details ul { padding-left: 1.2rem; }
+    footer { background: #1e3a8a; color: white; padding: 1rem; text-align: center; margin-top: 2rem; }
+    form input, form textarea { display: block; width: 100%; margin: 10px 0; padding: 8px; }
+    .btn { margin-top: 10px; }
   </style>
 </head>
 <body>
@@ -56,37 +28,53 @@
 </header>
 
 <section class="intro">
-  <h2>Chi siamo</h2>
-  <p>
-    Siamo un'azienda specializzata nella vendita e nel noleggio di biliardini professionali, ideali per uso domestico, eventi e locali.  
-    Offriamo qualità, assistenza e spedizioni rapide in tutta Italia. La nostra missione è fornire esperienze di gioco coinvolgenti e durature per tutte le età.
-  </p>
+  <h2>Chi Siamo</h2>
+  <p>BilliardinoGo nasce dalla passione per il gioco e la tradizione italiana. Offriamo biliardini di alta qualità per privati, eventi e aziende. I nostri prodotti sono selezionati con cura per offrire robustezza, estetica e divertimento. Acquista o noleggia oggi stesso!</p>
 </section>
 
 <section>
   <h2 style="text-align:center;">Prodotti in Vendita</h2>
   <div class="product-grid">
-
-    <div class="product" onclick="openModal(0)">
+    <div class="product" onclick="openModal('Classic', 299, '80x140 cm', 'Biliardino robusto, ideale per ambienti domestici e piccoli locali.', ['biliardino1.jpg','biliardino1b.jpg','biliardino1c.jpg'])">
       <img src="biliardino1.jpg" alt="Biliardino Classic">
       <h3>Biliardino Classic</h3>
       <p>Prezzo: €299</p>
     </div>
-
-    <div class="product" onclick="openModal(1)">
+    <div class="product" onclick="openModal('Deluxe', 349, '90x150 cm', 'Modello con finiture in legno e aste telescopiche, perfetto per ambienti eleganti.', ['biliardino2.jpg','biliardino2b.jpg','biliardino2c.jpg'])">
       <img src="biliardino2.jpg" alt="Biliardino Deluxe">
       <h3>Biliardino Deluxe</h3>
       <p>Prezzo: €349</p>
     </div>
-
-    <div class="product" onclick="openModal(2)">
+    <div class="product" onclick="openModal('Pro', 399, '100x160 cm', 'Il top di gamma per professionisti e tornei, design moderno e struttura rinforzata.', ['biliardino3.jpg','biliardino3b.jpg','biliardino3c.jpg'])">
       <img src="biliardino3.jpg" alt="Biliardino Pro">
       <h3>Biliardino Pro</h3>
       <p>Prezzo: €399</p>
     </div>
-
   </div>
 </section>
+
+<div id="productModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="document.getElementById('productModal').style.display='none'">&times;</span>
+    <h2 id="modalTitle"></h2>
+    <div id="modalImages"></div>
+    <p id="modalSize"></p>
+    <p id="modalDescription"></p>
+    <form id="paypalForm" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+      <input type="hidden" name="cmd" value="_xclick">
+      <input type="hidden" name="business" value="rosarioago1@icloud.com">
+      <input type="hidden" name="item_name" id="paypalItemName">
+      <input type="hidden" name="amount" id="paypalAmount">
+      <input type="hidden" name="currency_code" value="EUR">
+      <h4>Dati Acquirente:</h4>
+      <input type="text" name="nome" placeholder="Nome" required>
+      <input type="text" name="cognome" placeholder="Cognome" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="text" name="indirizzo" placeholder="Indirizzo di spedizione" required>
+      <input type="submit" value="Acquista con PayPal">
+    </form>
+  </div>
+</div>
 
 <section>
   <h2 style="text-align:center;">Noleggio</h2>
@@ -98,113 +86,25 @@
   © 2025 BilliardinoGo – Tutti i diritti riservati
 </footer>
 
-<!-- MODALE -->
-<div id="productModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <div class="gallery" id="modalGallery"></div>
-    <h3 id="modalTitle"></h3>
-    <p id="modalPrice"></p>
-    <p id="modalDesc"></p>
-    <div class="details" id="modalDetails"></div>
-    <form id="paypalForm" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="btn-paypal">
-      <input type="hidden" name="cmd" value="_xclick">
-      <input type="hidden" name="business" value="rosarioago1@icloud.com">
-      <input type="hidden" id="item_name" name="item_name">
-      <input type="hidden" id="amount" name="amount">
-      <input type="hidden" name="currency_code" value="EUR">
-      <input type="submit" value="Acquista con PayPal">
-    </form>
-  </div>
-</div>
-
 <script>
-  const products = [
-    {
-      name: "Biliardino Classic",
-      price: "€299",
-      amount: "299.00",
-      images: ["biliardino1.jpg", "biliardino1a.jpg", "biliardino1b.jpg"],
-      desc: "Il modello ideale per famiglie e ambienti domestici. Ottimo rapporto qualità/prezzo.",
-      specs: `
-        <ul>
-          <li><strong>Dimensioni:</strong> 140 x 75 x 88 cm</li>
-          <li><strong>Peso:</strong> 55 kg</li>
-          <li><strong>Materiale:</strong> MDF rinforzato</li>
-          <li><strong>Caratteristiche:</strong> Aste telescopiche, segnapunti manuali, piedini regolabili</li>
-        </ul>
-      `
-    },
-    {
-      name: "Biliardino Deluxe",
-      price: "€349",
-      amount: "349.00",
-      images: ["biliardino2.jpg", "biliardino2a.jpg", "biliardino2b.jpg"],
-      desc: "Design elegante e robusto, ideale per uffici, ludoteche e locali pubblici.",
-      specs: `
-        <ul>
-          <li><strong>Dimensioni:</strong> 145 x 78 x 89 cm</li>
-          <li><strong>Peso:</strong> 65 kg</li>
-          <li><strong>Materiale:</strong> Legno massello con finiture verniciate</li>
-          <li><strong>Caratteristiche:</strong> Manopole ergonomiche, campo da gioco laminato, aste cromate</li>
-        </ul>
-      `
-    },
-    {
-      name: "Biliardino Pro",
-      price: "€399",
-      amount: "399.00",
-      images: ["biliardino3.jpg", "biliardino3a.jpg", "biliardino3b.jpg"],
-      desc: "Perfetto per tornei e competizioni. Alta precisione e struttura professionale.",
-      specs: `
-        <ul>
-          <li><strong>Dimensioni:</strong> 150 x 80 x 90 cm</li>
-          <li><strong>Peso:</strong> 72 kg</li>
-          <li><strong>Materiale:</strong> Multistrato professionale e acciaio</li>
-          <li><strong>Caratteristiche:</strong> Campo professionale, rimbalzo veloce, piedini antiscivolo regolabili</li>
-        </ul>
-      `
-    }
-  ];
+function openModal(nome, prezzo, misura, descrizione, immagini) {
+  document.getElementById('modalTitle').textContent = `Biliardino ${nome}`;
+  document.getElementById('modalDescription').textContent = descrizione;
+  document.getElementById('modalSize').textContent = `Misure: ${misura}`;
+  document.getElementById('paypalItemName').value = `Biliardino ${nome}`;
+  document.getElementById('paypalAmount').value = prezzo;
 
-  function openModal(index) {
-    const modal = document.getElementById("productModal");
-    const gallery = document.getElementById("modalGallery");
-    const title = document.getElementById("modalTitle");
-    const desc = document.getElementById("modalDesc");
-    const price = document.getElementById("modalPrice");
-    const specs = document.getElementById("modalDetails");
-    const itemName = document.getElementById("item_name");
-    const amount = document.getElementById("amount");
+  const container = document.getElementById('modalImages');
+  container.innerHTML = '';
+  immagini.forEach(img => {
+    const image = document.createElement('img');
+    image.src = img;
+    image.style.margin = '10px 0';
+    container.appendChild(image);
+  });
 
-    const product = products[index];
-    gallery.innerHTML = "";
-    product.images.forEach(img => {
-      const image = document.createElement("img");
-      image.src = img;
-      gallery.appendChild(image);
-    });
-
-    title.innerText = product.name;
-    desc.innerText = product.desc;
-    price.innerText = "Prezzo: " + product.price;
-    specs.innerHTML = product.specs;
-    itemName.value = product.name;
-    amount.value = product.amount;
-
-    modal.style.display = "flex";
-  }
-
-  function closeModal() {
-    document.getElementById("productModal").style.display = "none";
-  }
-
-  window.onclick = function(event) {
-    const modal = document.getElementById("productModal");
-    if (event.target === modal) {
-      closeModal();
-    }
-  };
+  document.getElementById('productModal').style.display = 'flex';
+}
 </script>
 
 </body>
