@@ -3,19 +3,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BilliardinoGo</title>
+  <title>BilliardinoGo - Vendita e Noleggio Biliardini</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
-    header, footer { background: #1e3a8a; color: white; text-align: center; padding: 2rem; }
-    .product-grid { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; padding: 2rem; }
-    .product { background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 250px; cursor: pointer; }
-    .product .preview-img { width: 100%; border-radius: 10px; height: 180px; object-fit: cover; }
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; }
-    .modal-content { background: white; padding: 2rem; border-radius: 10px; width: 90%; max-width: 600px; position: relative; text-align: center; }
-    .close { position: absolute; top: 10px; right: 20px; font-size: 20px; cursor: pointer; }
-    .btn { margin-top: 15px; padding: 10px 20px; background: #1e3a8a; color: white; border: none; border-radius: 5px; cursor: pointer; }
-    .modal-images { display: flex; gap: 10px; justify-content: center; margin-bottom: 15px; flex-wrap: wrap; }
-    .modal-images img { width: 30%; border-radius: 10px; object-fit: cover; }
+    body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; }
+    header { background: #1e3a8a; color: white; padding: 2rem; text-align: center; }
+    section { padding: 2rem; }
+    .intro { max-width: 800px; margin: auto; text-align: center; font-size: 1.1rem; }
+    .product-grid { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; }
+    .product { background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 280px; text-align: center; cursor: pointer; overflow: hidden; }
+    .product img { width: 100%; height: auto; border-bottom: 1px solid #ccc; }
+    .product h3 { margin: 1rem 0 0.5rem; }
+    .product p { margin-bottom: 1rem; }
+    footer { background: #1e3a8a; color: white; padding: 1rem; text-align: center; }
+
+    /* Modal */
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 10; padding: 1rem; }
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      max-width: 900px;
+      width: 100%;
+      border-radius: 10px;
+      position: relative;
+      text-align: center;
+      overflow-y: auto;
+      max-height: 90vh;
+    }
+    .modal-content img { width: 100%; margin-bottom: 1rem; border-radius: 10px; }
+    .close { position: absolute; top: 10px; right: 20px; font-size: 1.5rem; cursor: pointer; }
+
+    .gallery { display: flex; gap: 1rem; overflow-x: auto; margin-bottom: 1rem; }
+    .gallery img { height: 150px; border-radius: 10px; }
+
+    .btn-paypal input[type="submit"] {
+      background-color: #ffc439;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .details { text-align: left; margin-top: 1rem; }
+    .details ul { padding-left: 1.2rem; }
   </style>
 </head>
 <body>
@@ -25,98 +55,156 @@
   <p>Vendita e noleggio biliardini in tutta Italia</p>
 </header>
 
-<div class="product-grid">
-  <!-- Prodotto 1 -->
-  <div class="product" onclick="openModal(0)">
-    <img class="preview-img" src="biliardino1.jpg" alt="Biliardino Classic">
-    <h3>Biliardino Classic</h3>
-    <p>Prezzo: <del>€349</del> <strong>€299</strong></p>
-  </div>
+<section class="intro">
+  <h2>Chi siamo</h2>
+  <p>
+    Siamo un'azienda specializzata nella vendita e nel noleggio di biliardini professionali, ideali per uso domestico, eventi e locali.  
+    Offriamo qualità, assistenza e spedizioni rapide in tutta Italia. La nostra missione è fornire esperienze di gioco coinvolgenti e durature per tutte le età.
+  </p>
+</section>
 
-  <!-- Prodotto 2 -->
-  <div class="product" onclick="openModal(1)">
-    <img class="preview-img" src="biliardino2.jpg" alt="Biliardino Deluxe">
-    <h3>Biliardino Deluxe</h3>
-    <p>Prezzo: <del>€399</del> <strong>€349</strong></p>
-  </div>
+<section>
+  <h2 style="text-align:center;">Prodotti in Vendita</h2>
+  <div class="product-grid">
 
-  <!-- Prodotto 3 -->
-  <div class="product" onclick="openModal(2)">
-    <img class="preview-img" src="biliardino3.jpg" alt="Biliardino Pro">
-    <h3>Biliardino Pro</h3>
-    <p>Prezzo: <del>€449</del> <strong>€399</strong></p>
-  </div>
-</div>
+    <div class="product" onclick="openModal(0)">
+      <img src="biliardino1.jpg" alt="Biliardino Classic">
+      <h3>Biliardino Classic</h3>
+      <p>Prezzo: €299</p>
+    </div>
 
-<!-- Modal -->
-<div class="modal" id="modal">
-  <div class="modal-content" id="modal-content">
+    <div class="product" onclick="openModal(1)">
+      <img src="biliardino2.jpg" alt="Biliardino Deluxe">
+      <h3>Biliardino Deluxe</h3>
+      <p>Prezzo: €349</p>
+    </div>
+
+    <div class="product" onclick="openModal(2)">
+      <img src="biliardino3.jpg" alt="Biliardino Pro">
+      <h3>Biliardino Pro</h3>
+      <p>Prezzo: €399</p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2 style="text-align:center;">Noleggio</h2>
+  <p style="text-align:center;">Contattaci per noleggiare un biliardino personalizzato per eventi, fiere o feste!</p>
+  <p style="text-align:center;"><strong>Email:</strong> <a href="mailto:rosarioago1@icloud.com">rosarioago1@icloud.com</a> – <strong>Tel:</strong> <a href="tel:+393485197954">3485197954</a></p>
+</section>
+
+<footer>
+  © 2025 BilliardinoGo – Tutti i diritti riservati
+</footer>
+
+<!-- MODALE -->
+<div id="productModal" class="modal">
+  <div class="modal-content">
     <span class="close" onclick="closeModal()">&times;</span>
-    <h2 id="modal-title"></h2>
-    <div class="modal-images" id="modal-images"></div>
-    <p id="modal-description"></p>
-    <p id="modal-price"></p>
-    <form id="paypal-form" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+    <div class="gallery" id="modalGallery"></div>
+    <h3 id="modalTitle"></h3>
+    <p id="modalPrice"></p>
+    <p id="modalDesc"></p>
+    <div class="details" id="modalDetails"></div>
+    <form id="paypalForm" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="btn-paypal">
       <input type="hidden" name="cmd" value="_xclick">
       <input type="hidden" name="business" value="rosarioago1@icloud.com">
       <input type="hidden" id="item_name" name="item_name">
       <input type="hidden" id="amount" name="amount">
       <input type="hidden" name="currency_code" value="EUR">
-      <input class="btn" type="submit" value="Acquista con PayPal">
+      <input type="submit" value="Acquista con PayPal">
     </form>
   </div>
 </div>
 
-<footer>
-  <p>© 2025 BilliardinoGo – Tutti i diritti riservati</p>
-</footer>
-
 <script>
   const products = [
     {
-      title: "Biliardino Classic",
-      description: "Modello perfetto per la casa o piccoli locali. Robusto, compatto e facile da trasportare.",
-      price: "299.00",
-      images: ["biliardino1.jpg", "biliardino1a.jpg", "biliardino1b.jpg"]
+      name: "Biliardino Classic",
+      price: "€299",
+      amount: "299.00",
+      images: ["biliardino1.jpg", "biliardino1a.jpg", "biliardino1b.jpg"],
+      desc: "Il modello ideale per famiglie e ambienti domestici. Ottimo rapporto qualità/prezzo.",
+      specs: `
+        <ul>
+          <li><strong>Dimensioni:</strong> 140 x 75 x 88 cm</li>
+          <li><strong>Peso:</strong> 55 kg</li>
+          <li><strong>Materiale:</strong> MDF rinforzato</li>
+          <li><strong>Caratteristiche:</strong> Aste telescopiche, segnapunti manuali, piedini regolabili</li>
+        </ul>
+      `
     },
     {
-      title: "Biliardino Deluxe",
-      description: "Design elegante e materiali di alta qualità. Ideale per uffici, bar e spazi ricreativi.",
-      price: "349.00",
-      images: ["biliardino2.jpg", "biliardino2a.jpg", "biliardino2b.jpg"]
+      name: "Biliardino Deluxe",
+      price: "€349",
+      amount: "349.00",
+      images: ["biliardino2.jpg", "biliardino2a.jpg", "biliardino2b.jpg"],
+      desc: "Design elegante e robusto, ideale per uffici, ludoteche e locali pubblici.",
+      specs: `
+        <ul>
+          <li><strong>Dimensioni:</strong> 145 x 78 x 89 cm</li>
+          <li><strong>Peso:</strong> 65 kg</li>
+          <li><strong>Materiale:</strong> Legno massello con finiture verniciate</li>
+          <li><strong>Caratteristiche:</strong> Manopole ergonomiche, campo da gioco laminato, aste cromate</li>
+        </ul>
+      `
     },
     {
-      title: "Biliardino Pro",
-      description: "Struttura professionale con aste telescopiche. Ideale per tornei e ambienti intensivi.",
-      price: "399.00",
-      images: ["biliardino3.jpg", "biliardino3a.jpg", "biliardino3b.jpg"]
+      name: "Biliardino Pro",
+      price: "€399",
+      amount: "399.00",
+      images: ["biliardino3.jpg", "biliardino3a.jpg", "biliardino3b.jpg"],
+      desc: "Perfetto per tornei e competizioni. Alta precisione e struttura professionale.",
+      specs: `
+        <ul>
+          <li><strong>Dimensioni:</strong> 150 x 80 x 90 cm</li>
+          <li><strong>Peso:</strong> 72 kg</li>
+          <li><strong>Materiale:</strong> Multistrato professionale e acciaio</li>
+          <li><strong>Caratteristiche:</strong> Campo professionale, rimbalzo veloce, piedini antiscivolo regolabili</li>
+        </ul>
+      `
     }
   ];
 
   function openModal(index) {
-    const modal = document.getElementById('modal');
-    const product = products[index];
-    document.getElementById('modal-title').textContent = product.title;
-    document.getElementById('modal-description').textContent = product.description;
-    document.getElementById('modal-price').innerHTML = `<strong>Prezzo: €${product.price}</strong>`;
-    document.getElementById('item_name').value = product.title;
-    document.getElementById('amount').value = product.price;
+    const modal = document.getElementById("productModal");
+    const gallery = document.getElementById("modalGallery");
+    const title = document.getElementById("modalTitle");
+    const desc = document.getElementById("modalDesc");
+    const price = document.getElementById("modalPrice");
+    const specs = document.getElementById("modalDetails");
+    const itemName = document.getElementById("item_name");
+    const amount = document.getElementById("amount");
 
-    const imgContainer = document.getElementById('modal-images');
-    imgContainer.innerHTML = "";
-    product.images.forEach(src => {
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = product.title;
-      imgContainer.appendChild(img);
+    const product = products[index];
+    gallery.innerHTML = "";
+    product.images.forEach(img => {
+      const image = document.createElement("img");
+      image.src = img;
+      gallery.appendChild(image);
     });
 
-    modal.style.display = 'flex';
+    title.innerText = product.name;
+    desc.innerText = product.desc;
+    price.innerText = "Prezzo: " + product.price;
+    specs.innerHTML = product.specs;
+    itemName.value = product.name;
+    amount.value = product.amount;
+
+    modal.style.display = "flex";
   }
 
   function closeModal() {
-    document.getElementById('modal').style.display = 'none';
+    document.getElementById("productModal").style.display = "none";
   }
+
+  window.onclick = function(event) {
+    const modal = document.getElementById("productModal");
+    if (event.target === modal) {
+      closeModal();
+    }
+  };
 </script>
 
 </body>
