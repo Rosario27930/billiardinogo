@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BilliardinoGo - Vendita e Noleggio Biliardini</title>
   <style>
     body {
@@ -11,68 +11,83 @@
       padding: 0;
       background: #f4f4f4;
     }
-    header {
+    header, footer {
       background: #1e3a8a;
       color: white;
-      padding: 2rem;
       text-align: center;
+      padding: 2rem 1rem;
     }
     section {
-      padding: 2rem;
+      padding: 2rem 1rem;
     }
     .product-grid {
       display: flex;
-      gap: 2rem;
       flex-wrap: wrap;
       justify-content: center;
+      gap: 2rem;
     }
     .product {
       background: white;
       padding: 1rem;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
       width: 280px;
-      text-align: center;
+      cursor: pointer;
     }
-    .slideshow-container {
+    .product .slider {
       position: relative;
-      width: 100%;
-      height: 200px;
       overflow: hidden;
       border-radius: 10px;
+      height: 200px;
     }
-    .slideshow-container img {
-      position: absolute;
+    .slider img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
+      display: none;
     }
-    .slideshow-container img.active {
-      opacity: 1;
+    .slider img.active {
+      display: block;
     }
-    footer {
-      background: #1e3a8a;
-      color: white;
-      padding: 1rem;
-      text-align: center;
-      margin-top: 2rem;
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 500px;
+      width: 90%;
+      position: relative;
+    }
+    .modal-content img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
     }
     .btn {
       margin-top: 10px;
-    }
-    input[type="submit"] {
-      background-color: #1e3a8a;
+      background: #1e3a8a;
       color: white;
-      padding: 10px 20px;
+      padding: 0.5rem 1rem;
       border: none;
-      border-radius: 8px;
       cursor: pointer;
-      transition: background 0.3s;
-    }
-    input[type="submit"]:hover {
-      background-color: #3b5ec5;
+      border-radius: 5px;
     }
   </style>
 </head>
@@ -86,96 +101,113 @@
 <section>
   <h2 style="text-align:center;">Prodotti in Vendita</h2>
   <div class="product-grid">
-
-    <!-- Biliardino Classic -->
-    <div class="product">
-      <div class="slideshow-container" id="slideshow1">
-        <img src="biliardino1.jpg" class="active" />
-        <img src="biliardino1a.jpg" />
-        <img src="biliardino1b.jpg" />
+    <!-- Prodotto Classic -->
+    <div class="product" onclick="openModal('Classic')">
+      <div class="slider" id="slider-Classic">
+        <img src="biliardino1.jpg" class="active">
+        <img src="biliardino1a.jpg">
+        <img src="biliardino1b.jpg">
       </div>
       <h3>Biliardino Classic</h3>
       <p>Prezzo: €299</p>
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="btn">
-        <input type="hidden" name="cmd" value="_xclick">
-        <input type="hidden" name="business" value="rosarioago1@icloud.com">
-        <input type="hidden" name="item_name" value="Biliardino Classic">
-        <input type="hidden" name="amount" value="299.00">
-        <input type="hidden" name="currency_code" value="EUR">
-        <input type="submit" value="Acquista con PayPal">
-      </form>
     </div>
-
-    <!-- Biliardino Deluxe -->
-    <div class="product">
-      <div class="slideshow-container" id="slideshow2">
-        <img src="biliardino2.jpg" class="active" />
-        <img src="biliardino2a.jpg" />
-        <img src="biliardino2b.jpg" />
+    <!-- Prodotto Deluxe -->
+    <div class="product" onclick="openModal('Deluxe')">
+      <div class="slider" id="slider-Deluxe">
+        <img src="biliardino2.jpg" class="active">
+        <img src="biliardino2a.jpg">
+        <img src="biliardino2b.jpg">
       </div>
       <h3>Biliardino Deluxe</h3>
       <p>Prezzo: €349</p>
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="btn">
-        <input type="hidden" name="cmd" value="_xclick">
-        <input type="hidden" name="business" value="rosarioago1@icloud.com">
-        <input type="hidden" name="item_name" value="Biliardino Deluxe">
-        <input type="hidden" name="amount" value="349.00">
-        <input type="hidden" name="currency_code" value="EUR">
-        <input type="submit" value="Acquista con PayPal">
-      </form>
     </div>
-
-    <!-- Biliardino Pro -->
-    <div class="product">
-      <div class="slideshow-container" id="slideshow3">
-        <img src="biliardino3.jpg" class="active" />
-        <img src="biliardino3a.jpg" />
-        <img src="biliardino3b.jpg" />
+    <!-- Prodotto Pro -->
+    <div class="product" onclick="openModal('Pro')">
+      <div class="slider" id="slider-Pro">
+        <img src="biliardino3.jpg" class="active">
+        <img src="biliardino3a.jpg">
+        <img src="biliardino3b.jpg">
       </div>
       <h3>Biliardino Pro</h3>
       <p>Prezzo: €399</p>
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="btn">
-        <input type="hidden" name="cmd" value="_xclick">
-        <input type="hidden" name="business" value="rosarioago1@icloud.com">
-        <input type="hidden" name="item_name" value="Biliardino Pro">
-        <input type="hidden" name="amount" value="399.00">
-        <input type="hidden" name="currency_code" value="EUR">
-        <input type="submit" value="Acquista con PayPal">
-      </form>
     </div>
-
   </div>
 </section>
 
 <section>
   <h2 style="text-align:center;">Noleggio</h2>
   <p style="text-align:center;">Contattaci per noleggiare un biliardino personalizzato per eventi, fiere o feste!</p>
-  <p style="text-align:center;">
-    <strong>Email:</strong> <a href="mailto:rosarioago1@icloud.com">rosarioago1@icloud.com</a> –
-    <strong>Tel:</strong> <a href="tel:+393485197954">3485197954</a>
-  </p>
+  <p style="text-align:center;"><strong>Email:</strong> <a href="mailto:rosarioago1@icloud.com">rosarioago1@icloud.com</a> – <strong>Tel:</strong> <a href="tel:+393485197954">3485197954</a></p>
 </section>
 
 <footer>
   © 2025 BilliardinoGo – Tutti i diritti riservati
 </footer>
 
-<script>
-  function startSlideshow(id) {
-    const container = document.getElementById(id);
-    const slides = container.getElementsByTagName('img');
-    let index = 0;
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content" id="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <h3 id="modal-title"></h3>
+    <p id="modal-desc"></p>
+    <img id="modal-img" src="" alt="">
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+      <input type="hidden" name="cmd" value="_xclick">
+      <input type="hidden" name="business" value="rosarioago1@icloud.com">
+      <input type="hidden" name="item_name" id="paypal-item">
+      <input type="hidden" name="amount" id="paypal-amount">
+      <input type="hidden" name="currency_code" value="EUR">
+      <input type="submit" class="btn" value="Acquista con PayPal">
+    </form>
+  </div>
+</div>
 
+<script>
+  const sliders = document.querySelectorAll('.slider');
+  sliders.forEach(slider => {
+    let index = 0;
+    const images = slider.querySelectorAll('img');
     setInterval(() => {
-      slides[index].classList.remove('active');
-      index = (index + 1) % slides.length;
-      slides[index].classList.add('active');
+      images[index].classList.remove('active');
+      index = (index + 1) % images.length;
+      images[index].classList.add('active');
     }, 3000);
+  });
+
+  const products = {
+    'Classic': {
+      title: 'Biliardino Classic',
+      desc: 'Struttura in legno robusta, aste cromate e manopole ergonomiche. Ideale per uso domestico.',
+      img: 'biliardino1.jpg',
+      price: '299.00'
+    },
+    'Deluxe': {
+      title: 'Biliardino Deluxe',
+      desc: 'Design elegante con finiture in metallo, aste rinforzate e campo da gioco professionale.',
+      img: 'biliardino2.jpg',
+      price: '349.00'
+    },
+    'Pro': {
+      title: 'Biliardino Pro',
+      desc: 'Modello professionale con gambe regolabili, livellamento di precisione e struttura ultra resistente.',
+      img: 'biliardino3.jpg',
+      price: '399.00'
+    }
+  };
+
+  function openModal(type) {
+    const product = products[type];
+    document.getElementById('modal-title').textContent = product.title;
+    document.getElementById('modal-desc').textContent = product.desc;
+    document.getElementById('modal-img').src = product.img;
+    document.getElementById('paypal-item').value = product.title;
+    document.getElementById('paypal-amount').value = product.price;
+    document.getElementById('modal').style.display = 'flex';
   }
 
-  startSlideshow('slideshow1');
-  startSlideshow('slideshow2');
-  startSlideshow('slideshow3');
+  function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+  }
 </script>
 
 </body>
